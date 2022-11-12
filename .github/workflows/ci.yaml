@@ -1,0 +1,70 @@
+name: GitHub Actions Demo
+on:
+  push:
+    branches:
+      - main
+
+env:
+  LOCATION: 'europe-west4-docker.pkg.dev'
+  PROJECT-ID: 'iot-project-368021'
+  REPOSITORY: 'quarkus-iot-data-handler'
+  IMAGE: 'iot-data-handler'
+
+jobs:
+  buildArtifacts:
+    name: 🛠️ application 📦️
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get Timestamp
+        id: timestamp
+        run: echo "::set-output name=timestamp::$(date +'%Y%m%d%H%M%S')"
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: ${{ runner.os }}-gradle
+
+      - name: Build
+        run: >
+          ./gradlew build
+          -x test
+
+      - name: Test
+        run: >
+          ./gradlew
+          test --info
+
+      - name: Build Docker Image
+        run: >
+          docker build
+          -f src/main/docker/Dockerfile.jvm
+          -t ${{ env.LOCATION }}/${{ env.PROJECT-ID }}/${{ env.REPOSITORY}}/${{ env.DOCKER_IMAGE }}:${GITHUB_SHA}
+
+
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.SERVICE_ACCOUNT_GITHUB_ACTION }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+
+      - name: Push docker image
+        run: |
+          # configure docker to use Google Container Registry
+          gcloud auth configure-docker
+          # publish the docker image
+          docker push ${{ env.LOCATION }}/${{ env.PROJECT-ID }}/${{ env.REPOSITORY}}/${{ env.DOCKER_IMAGE }}:${GITHUB_SHA}
