@@ -50,7 +50,7 @@ jobs:
         run: >
           docker build
           -f src/main/docker/Dockerfile.jvm
-          -t ${{ env.LOCATION }}/${{ env.PROJECT-ID }}/${{ env.REPOSITORY}}/${{ env.IMAGE }}:${GITHUB_SHA}
+          -t ${{ env.LOCATION }}/${{ env.PROJECT-ID }}/${{ env.REPOSITORY}}/${{ env.IMAGE }}:${GITHUB_SHA} .
 
 
       - id: 'auth'
