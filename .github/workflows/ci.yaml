@@ -68,4 +68,4 @@ jobs:
           # configure docker to use Google Container Registry
           gcloud auth configure-docker
           # publish the docker image
-          docker push ${{ env.LOCATION }}/${{ env.PROJECT-ID }}/${{ env.REPOSITORY}}/${{ env.DOCKER_IMAGE }}:${GITHUB_SHA}
+          docker push ${{ env.LOCATION }}/${{ env.PROJECT-ID }}/${{ env.REPOSITORY}}/${{ env.IMAGE }}:${GITHUB_SHA}
