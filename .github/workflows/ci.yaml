@@ -66,6 +66,6 @@ jobs:
       - name: Push docker image
         run: |
           # configure docker to use Google Container Registry
-          gcloud auth configure-docker
+          gcloud auth configure-docker ${{ env.LOCATION }}
           # publish the docker image
           docker push ${{ env.LOCATION }}/${{ env.PROJECT-ID }}/${{ env.REPOSITORY}}/${{ env.IMAGE }}:${GITHUB_SHA}
