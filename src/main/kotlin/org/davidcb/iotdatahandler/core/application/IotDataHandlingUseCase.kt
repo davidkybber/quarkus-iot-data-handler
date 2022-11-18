@@ -10,5 +10,5 @@ class IotDataHandlingUseCase(
     private val temperaturePersistencePort: TemperaturePersistencePort,
 ) {
     fun persistIotTemperatureData(temperature: Temperature): Uni<Unit> =
-        temperaturePersistencePort.persist(temperature).onItem().transform {  }
+        temperaturePersistencePort.persist(temperature).onItem().transform { }
 }
