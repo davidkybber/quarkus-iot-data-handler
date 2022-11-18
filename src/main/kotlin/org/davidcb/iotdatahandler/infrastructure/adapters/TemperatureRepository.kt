@@ -1,0 +1,8 @@
+package org.davidcb.iotdatahandler.infrastructure.adapters
+
+import io.quarkus.mongodb.panache.reactive.ReactivePanacheMongoRepository
+import org.davidcb.iotdatahandler.infrastructure.adapters.entities.TemperatureEntity
+import javax.enterprise.context.ApplicationScoped
+
+@ApplicationScoped
+class TemperatureRepository : ReactivePanacheMongoRepository<TemperatureEntity>

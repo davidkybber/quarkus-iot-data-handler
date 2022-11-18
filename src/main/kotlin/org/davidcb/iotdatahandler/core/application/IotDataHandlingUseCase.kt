@@ -2,7 +2,7 @@ package org.davidcb.iotdatahandler.core.application
 
 import io.smallrye.mutiny.Uni
 import org.davidcb.iotdatahandler.core.domain.models.Temperature
-import org.davidcb.iotdatahandler.core.ports.out.TemperaturePersistencePort
+import org.davidcb.iotdatahandler.core.ports.TemperaturePersistencePort
 import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
