@@ -14,4 +14,7 @@ object TemperatureMapper {
 
     fun toDomain(temperatureDto: TemperatureDto) =
         Temperature(iotDeviceId = temperatureDto.iotDeviceId, degrees = temperatureDto.degrees, humidity = temperatureDto.humidity, timeStamp = Instant.now())
+
+    fun toDto(temperature: Temperature) =
+        TemperatureDto(iotDeviceId = temperature.iotDeviceId, degrees = temperature.degrees, humidity = temperature.humidity)
 }

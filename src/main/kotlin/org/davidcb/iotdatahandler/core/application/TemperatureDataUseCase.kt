@@ -13,4 +13,8 @@ class TemperatureDataUseCase(
     fun persistIotTemperatureData(temperature: Temperature): Uni<Unit> =
         temperaturePersistencePort.persist(temperature).onItem().transform { }
             .onFailure().retry().withBackOff(Duration.ofSeconds(20)).atMost(2)
+
+    fun getLatestTemperatureData(): Uni<Temperature> =
+        temperaturePersistencePort.getLatest()
+            .onFailure().retry().withBackOff(Duration.ofSeconds(20)).atMost(2)
 }
