@@ -1,7 +1,7 @@
-package org.davidcb.iotdatahandler.infrastructure.adapters
+package org.davidcb.iotdatahandler.infrastructure.adapters.outward
 
 import io.smallrye.mutiny.Uni
-import org.davidcb.iotdatahandler.core.domain.models.Temperature
+import org.davidcb.iotdatahandler.core.domain.model.Temperature
 import org.davidcb.iotdatahandler.core.ports.TemperaturePersistencePort
 import javax.enterprise.context.ApplicationScoped
 

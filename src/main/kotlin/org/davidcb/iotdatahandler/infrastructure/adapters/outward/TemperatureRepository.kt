@@ -1,4 +1,4 @@
-package org.davidcb.iotdatahandler.infrastructure.adapters
+package org.davidcb.iotdatahandler.infrastructure.adapters.outward
 
 import io.quarkus.mongodb.panache.reactive.ReactivePanacheMongoRepository
 import org.davidcb.iotdatahandler.infrastructure.adapters.entities.TemperatureEntity
