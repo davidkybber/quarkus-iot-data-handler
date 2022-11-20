@@ -11,7 +11,7 @@ class IotDevicePersistenceAdapter(
     val iotDeviceRepository: IotDeviceRepository,
 ) : IotDevicePersistencePort {
     override fun persist(iotDevice: IotDevice): Uni<IotDevice> {
-        val iotDeviceEntity = iotDeviceRepository.persistOrUpdate(IotDeviceMapper.toEntity(iotDevice))
+        val iotDeviceEntity = iotDeviceRepository.upsert(IotDeviceMapper.toEntity(iotDevice))
         return iotDeviceEntity.onItem().transform(IotDeviceMapper::toDomain)
     }
 
