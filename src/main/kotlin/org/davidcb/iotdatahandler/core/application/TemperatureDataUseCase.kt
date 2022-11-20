@@ -7,7 +7,7 @@ import java.time.Duration
 import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
-class IotDataHandlingUseCase(
+class TemperatureDataUseCase(
     private val temperaturePersistencePort: TemperaturePersistencePort,
 ) {
     fun persistIotTemperatureData(temperature: Temperature): Uni<Unit> =

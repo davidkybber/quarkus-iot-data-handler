@@ -1,4 +1,4 @@
-package org.davidcb.iotdatahandler.infrastructure.adapters.outward
+package org.davidcb.iotdatahandler.infrastructure.adapters.outward.temperature
 
 import io.smallrye.mutiny.Uni
 import org.davidcb.iotdatahandler.core.domain.model.Temperature
