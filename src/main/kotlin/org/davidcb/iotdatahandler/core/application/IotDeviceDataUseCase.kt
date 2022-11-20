@@ -12,5 +12,9 @@ class IotDeviceDataUseCase(
 ) {
     fun persistIotDeviceData(iotDevice: IotDevice): Uni<Unit> =
         iotDevicePersistencePort.persist(iotDevice).onItem().transform { }
-            .onFailure().retry().withBackOff(Duration.ofSeconds(20)).atMost(2)
+            .onFailure().retry().withBackOff(Duration.ofSeconds(10)).atMost(2)
+
+    fun getAllIotDevices(): Uni<List<IotDevice>> =
+        iotDevicePersistencePort.getAll()
+            .onFailure().retry().withBackOff(Duration.ofSeconds(10)).atMost(2)
 }

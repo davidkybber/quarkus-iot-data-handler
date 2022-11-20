@@ -4,6 +4,6 @@ import io.quarkus.mongodb.panache.common.MongoEntity
 
 @MongoEntity(collection = "iot-device")
 data class IotDeviceEntity(
-    var iotDeviceId: String,
+    var iotDeviceId: String? = null,
     var deviceBatteryStatus: String? = null,
 )

@@ -1,7 +1,10 @@
 package org.davidcb.iotdatahandler.infrastructure.adapters.`in`.iotdevice
 
+import io.smallrye.mutiny.Uni
 import org.davidcb.iotdatahandler.core.application.IotDeviceDataUseCase
+import org.davidcb.iotdatahandler.core.domain.model.IotDevice
 import org.davidcb.iotdatahandler.infrastructure.adapters.outward.iotdevice.IotDeviceMapper.toDomain
+import java.lang.Exception
 import javax.ws.rs.GET
 import javax.ws.rs.POST
 import javax.ws.rs.Path
@@ -30,7 +33,7 @@ class IotDeviceController(
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/iotdevice")
     @GET
-    fun iotDeviceData(): String{
-        return ""
+    fun iotDeviceData(): Uni<List<IotDevice>> {
+        return iotDeviceDataUseCase.getAllIotDevices()
     }
 }

@@ -5,4 +5,5 @@ import org.davidcb.iotdatahandler.core.domain.model.IotDevice
 
 interface IotDevicePersistencePort {
     fun persist(iotDevice: IotDevice): Uni<IotDevice>
+    fun getAll(): Uni<List<IotDevice>>
 }
