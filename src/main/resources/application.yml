@@ -2,3 +2,10 @@ quarkus:
   mongodb:
     connection-string: mongodb+srv://davidcb:${MONGO_PASSWORD}@home-cluster.128tt5d.mongodb.net/?retryWrites=true&w=majority
     database: iot-data
+  micrometer:
+    export:
+      stackdriver:
+        publish: true
+        project-id: iot-project-368021
+        enabled: true
+        default-registry: true
