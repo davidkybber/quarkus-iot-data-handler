@@ -6,3 +6,4 @@ quarkus:
     export:
       stackdriver:
         default-registry: false
+    binder-enabled-default: false

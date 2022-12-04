@@ -15,8 +15,8 @@ class TemperaturePersistenceAdapter(
     val meterRegistry: MeterRegistry,
 ) : TemperaturePersistencePort {
     override fun persist(temperature: Temperature): Uni<Temperature> {
-        meterRegistry.gauge("temperature", listOf(Tag.of("device", temperature.iotDeviceId)), temperature.degrees.toBigDecimal())
-        meterRegistry.gauge("humidity", listOf(Tag.of("device", temperature.iotDeviceId)), temperature.humidity.toBigDecimal())
+        meterRegistry.gauge(/* name = */ "temperature", /* tags = */ listOf(Tag.of("device", temperature.iotDeviceId)), /* number = */ temperature.degrees.toBigDecimal())
+        meterRegistry.gauge(/* name = */ "humidity", /* tags = */ listOf(Tag.of("device", temperature.iotDeviceId)), /* number = */ temperature.humidity.toBigDecimal())
         val temperatureEntity = temperatureRepository.persist(TemperatureMapper.toEntity(temperature))
         return temperatureEntity.onItem().transform(TemperatureMapper::toDomain)
     }
