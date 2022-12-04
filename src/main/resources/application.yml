@@ -9,3 +9,4 @@ quarkus:
         project-id: iot-project-368021
         enabled: true
         default-registry: true
+        step: "20s"
