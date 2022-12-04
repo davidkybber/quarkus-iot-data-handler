@@ -1,6 +1,7 @@
 package org.davidcb.iotdatahandler.infrastructure.adapters.outward.temperature
 
 import io.micrometer.core.instrument.MeterRegistry
+import io.micrometer.core.instrument.Tag
 import io.quarkus.panache.common.Sort
 import io.smallrye.mutiny.Uni
 import org.davidcb.iotdatahandler.core.domain.model.Temperature
@@ -14,8 +15,8 @@ class TemperaturePersistenceAdapter(
     val meterRegistry: MeterRegistry,
 ) : TemperaturePersistencePort {
     override fun persist(temperature: Temperature): Uni<Temperature> {
-        meterRegistry.gauge("temperature", temperature.degrees.toBigDecimal())
-        meterRegistry.gauge("humidity", temperature.humidity.toBigDecimal())
+        meterRegistry.gauge("temperature", listOf(Tag.of("device", "temperature")), temperature.degrees.toBigDecimal())
+        meterRegistry.gauge("humidity", listOf(Tag.of("device", "temperature")), temperature.humidity.toBigDecimal())
         val temperatureEntity = temperatureRepository.persist(TemperatureMapper.toEntity(temperature))
         return temperatureEntity.onItem().transform(TemperatureMapper::toDomain)
     }
